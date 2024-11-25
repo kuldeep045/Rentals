@@ -1,0 +1,11 @@
+.bg{
+    background-image: linear-gradient(#0b051cad, #0b051ca2, #0b051c76   ), url('../../assets/hero-bg.webp');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background: linear-gradient(black 40%);
+    /* position: absolute; */
+    z-index: -999;
+    top: 0;
+
+}
