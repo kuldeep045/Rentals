@@ -5,7 +5,6 @@ const OtpAuth = asynchandler(async (req, res, next) => {
     try {
         const {email, otp} = req.body
         const response = await verifyOtp(email, otp)
-        console.log('res', response)
 
         const message = response.message
 

@@ -61,6 +61,7 @@ function Login() {
 
                 })
                 
+                
                 setData(email)
                 //
                 navigate('/verify')
@@ -75,18 +76,30 @@ function Login() {
 
         }else{
 
+            setData(email)
             const loginData = {
                 userName,
                 email,
                 password
             }
             
-            axios.post('http://localhost:3000/api/v1/users/login', loginData)
+            await axios.post('http://localhost:3000/api/v1/users/login', loginData)
             .then((response) => {
                 console.log(response)
-                navigate('/')
+                if(!response.data.data.loggedInUser.verified){ 
+                    navigate('/verify')
+                    console.log("response: ", response.data.data.loggedInUser.verified)
+
+                }else{
+                    console.log(response)
+                    navigate('/')
+                }
+            
             })
-            .catch((err) => console.log("loginerr: ", err))
+            .catch((err) => {
+                console.log("loginerr: ", err.response.data.message)
+                toast.error(err.response.data.message)
+            })
 
         }
 

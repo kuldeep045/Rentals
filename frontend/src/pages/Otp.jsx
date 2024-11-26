@@ -8,7 +8,7 @@ import { LoginContext } from '../context/LoginContext.jsx'
 
 function Otp() {
   const navigate = useNavigate()
-  const {data} = useContext(otpContext)
+  const {data, setData} = useContext(otpContext)
   const {loginState, setloginState } = useContext(LoginContext)
 
   
@@ -42,17 +42,17 @@ function Otp() {
         toast.error("Please enter a valid otp")
         return
       }
-      console.log(data)
+      
       const res = await axios.post('http://localhost:3000/api/v1/users/auth', {
         email: data,
         otp: otp
       })
       
-      console.log(res)
+      console.log("auth result: ", res.data)
       if(res.data.success){
         toast.success(res.data.message)
         setloginState("login")
-        navigate('/login')
+        navigate('/')
       }
 
 

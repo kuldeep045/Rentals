@@ -3,10 +3,11 @@ import Navbar from "../../components/Navbar.jsx";
 import "./Home.css";
 import { houses } from "../../assets/app.js";
 import { clientOpinion } from "../../assets/app.js";
+import Footer from "../../components/Footer.jsx";
 
 function Home() {
   return (
-    <div className="home min-h-[100vh] w-full relative">
+    <div className="home min-h-[100vh]  w-full relative">
       <Navbar />
 
       {/* hero */}
@@ -29,7 +30,7 @@ function Home() {
         <div className="flex flex-wrap gap-1 justify-evenly h-[75%] w-full tablet:gap-2">
           {
             houses.map((house) => (
-              <div className="bg-[#28223B] cursor-pointer border-b-0 mt-10 h-full w-[90%] tablet:w-[45%] laptop:w-[30%] rounded-lg" key={house.id}>
+              <div className="bg-[#28223B] client cursor-pointer border-b-0 mt-10 h-full w-[90%] tablet:w-[45%] laptop:w-[30%] rounded-lg" key={house.id}>
                 <img className="h-[60%] object-cover w-full" src={house.image} alt="" />
                 <div className="flex py-2 flex-col items-center">
                 <p className="text-xl text-white mb-3">{house.name}</p>
@@ -51,10 +52,10 @@ function Home() {
       <div className="laptop:h-[100vh] w-full bg-[#0B051C] px-[10%] py-5">
         <h1 className="text-center text-3xl text-white font-medium">What out Client Says</h1>
 
-        <div  className="flex flex-wrap gap-1  justify-evenly h-[75%] w-full tablet:gap-2">
+        <div  className="flex flex-wrap gap-1  justify-evenly h-[75%] w-full tablet:gap-2 ">
           {
             clientOpinion.map( (client) => (
-              <div className="bg-[#28223B] text-white cursor-pointer border-b-0 mt-10 h-full w-[90%] tablet:w-[45%] laptop:w-[30%] rounded-lg" key={client.clientId}>
+              <div className="bg-[#28223B] client text-white cursor-pointer mt-10 h-full w-[90%] tablet:w-[45%] laptop:w-[30%] " key={client.clientId}>
                 <div className="h-[60%]">
                   <img className=" h-full w-full object-cover" src={client.image} alt="" />
                 </div>
@@ -72,6 +73,7 @@ function Home() {
 
 
       </div>
+      <Footer/>
     </div> 
   );
 }

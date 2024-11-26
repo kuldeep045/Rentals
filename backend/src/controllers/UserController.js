@@ -6,6 +6,8 @@ import {User} from '../models/user.model.js'
 import { Otp } from '../models/otp.model.js'
 import { sendOtp, generateOtp } from '../utils/Otp.js'
 
+import { getOtp } from '../utils/Otpsend.js'
+
 
 
 
@@ -57,27 +59,9 @@ const userRegister = asyncHandler( async (req, res) => {
 
 
         //TODO make otp validation
-        const otp = generateOtp()
 
-        if(!otp){
-            console.error("failed to generate otp: ")
-        }
-
-        //store otp in db
-        const storeOtp = await Otp.create(
-            {
-                otp,
-                email,
-                expiresAt: new Date(Date.now() + 5 * 60000)
-
-            }
-        )
-
-        await storeOtp.save()
-
-        await sendOtp(email, otp)
-        .then((data) => console.log("Otp sent successfully", data))
-        .catch((error) => console.log(error))
+        await getOtp(email)
+        
 
         
 
@@ -122,7 +106,7 @@ const sendRegData = asyncHandler(
                 return res.status(400).json(new ApiResponse(400, message, {}, false))
             }
 
-            console.log(createdUser)
+            
             return res.status(200).json(new ApiResponse(200, 'Successfully verified user', createdUser))
 
 
@@ -139,14 +123,16 @@ const sendRegData = asyncHandler(
 const userLogin = asyncHandler( async(req, res) => {
 
     const {userName, email, password} = req.body
-    console.log("Email: ", email, "UserName: ", userName)
+    //const message = req.message
 
     if(!userName && !email){
         throw new ApiError(404, "email or userName required")
     }
 
+    
     const user = await User.findOne({$or:[{email}, {userName}]})
 
+    console.log("user", user)
     if(!user){
         return res.status(404).json(new ApiResponse(404, "User not found", {}, false))
     }
@@ -158,7 +144,6 @@ const userLogin = asyncHandler( async(req, res) => {
 
     const {accessToken, refreshToken} = await generateAccessAndRefreshToken(user._id)
     const loggedInUser = await User.findById(user._id).select("-password -refreshToken")
-    console.log(loggedInUser)
 
     const options = {
         httpOnly : true,
@@ -169,7 +154,7 @@ const userLogin = asyncHandler( async(req, res) => {
     .status(200)
     .cookie("AccessToken", accessToken, options)
     .cookie("RefreshToken", refreshToken, options)
-    .json(new ApiResponse(200, "user logged in successfully", {loggedInUser}))
+    .json(new ApiResponse(200, "user logged in successfully", {loggedInUser, accessToken, refreshToken}))
 
 
 })

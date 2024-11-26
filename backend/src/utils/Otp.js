@@ -43,7 +43,7 @@ const sendOtp =  async (email, otp) => {
 
 const verifyOtp = async (email, otp) => {
     const dbOtp = await Otp.findOne({email, otp})
-    console.log("Email: ", email, "otp: ", otp)
+    
 
     if(!dbOtp){
         return new ApiResponse(400, "Invalid otp", {}, false)

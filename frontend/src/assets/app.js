@@ -6,6 +6,10 @@ import client_1 from './family-1.jpg'
 import client_2 from './family-2.jpg'
 import client_3 from './family-3.jpg'
 
+import facebook from './facebook-icon.png'
+import tiktok from './tiktok-icon.png'
+import insta from './insta-icon.webp'
+
 
 
 export const houses = [
@@ -59,6 +63,13 @@ export const houses = [
     },
 
 ]
+
+
+export const icons = {
+    facebook,
+    tiktok,
+    insta
+}
 
 export const clientOpinion = [
     {
