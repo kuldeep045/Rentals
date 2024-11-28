@@ -9,8 +9,117 @@ import client_3 from './family-3.jpg'
 import facebook from './facebook-icon.png'
 import tiktok from './tiktok-icon.png'
 import insta from './insta-icon.webp'
+import user_icon from './profile-user.png'
 
 
+import h_1 from './houses/house_1.jpg'
+import h_2 from './houses/house_2.jpg'
+import h_3 from './houses/house_3.jpg'
+import h_4 from './houses/house_4.jpg'
+import h_5 from './houses/house_5.jpg'
+import h_6 from './houses/house_6.jpg'
+import h_7 from './houses/house_7.png'
+
+export const hou = [
+    {
+        id: "h_1",
+        image: h_1,
+        price: "150,000.00",
+        numbeds: 4,
+        numBaths: 3,
+        area: "2000 sq ft",
+        status: "sale",
+        address: {
+            address1: "143 Rolling Meadows",
+            address2: "Jackson, MS39211",
+        },
+        owner: "CPA Real Estate ICC"
+    },
+    {
+        id: "h_2",
+        image: h_2,
+        price: "175,000.00",
+        numbeds: 3,
+        numBaths: 2,
+        area: "1800 sq ft",
+        status: "sale",
+        address: {
+            address1: "22 Oakwood Drive",
+            address2: "Baton Rouge, LA70806",
+        },
+        owner: "Prestige Realty Group"
+    },
+    {
+        id: "h_3",
+        image: h_3,
+        price: "220,000.00",
+        numbeds: 5,
+        numBaths: 4,
+        area: "3000 sq ft",
+        status: "sale",
+        address: {
+            address1: "78 Creekside Lane",
+            address2: "Austin, TX78745",
+        },
+        owner: "Elite Properties"
+    },
+    {
+        id: "h_4",
+        image: h_4,
+        price: "135,000.00",
+        numbeds: 2,
+        numBaths: 1,
+        area: "1200 sq ft",
+        status: "sale",
+        address: {
+            address1: "9 Maple Street",
+            address2: "Nashville, TN37203",
+        },
+        owner: "Prime Realty Inc."
+    },
+    {
+        id: "h_5",
+        image: h_5,
+        price: "310,000.00",
+        numbeds: 4,
+        numBaths: 3,
+        area: "2800 sq ft",
+        status: "sale",
+        address: {
+            address1: "55 Riverwalk Avenue",
+            address2: "Charleston, SC29401",
+        },
+        owner: "Luxury Homes Co."
+    },
+    {
+        id: "h_6",
+        image: h_6,
+        price: "400,000.00",
+        numbeds: 6,
+        numBaths: 5,
+        area: "4500 sq ft",
+        status: "Rent",
+        address: {
+            address1: "301 Lakeshore Drive",
+            address2: "Orlando, FL32803",
+        },
+        owner: "Dream Homes Realty"
+    },
+    {
+        id: "h_7",
+        image: h_7,
+        price: "95,000.00",
+        numbeds: 2,
+        numBaths: 1,
+        area: "900 sq ft",
+        status: "sale",
+        address: {
+            address1: "123 Sunrise Avenue",
+            address2: "Columbus, OH43215",
+        },
+        owner: "Affordable Housing LLC"
+    }
+];
 
 export const houses = [
     {
@@ -68,7 +177,8 @@ export const houses = [
 export const icons = {
     facebook,
     tiktok,
-    insta
+    insta,
+    user_icon
 }
 
 export const clientOpinion = [

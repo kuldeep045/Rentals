@@ -11,8 +11,8 @@ import { LoginContext } from '../context/LoginContext.jsx';
 
 function Login() {
 
-    // const [loginState, setLoginState] = useState('signup')
-    const {loginState, setloginState} = useContext(LoginContext)
+   
+    const {loginState, setloginState, setisLoggedIn} = useContext(LoginContext)
     
     
 
@@ -92,6 +92,7 @@ function Login() {
 
                 }else{
                     console.log(response)
+                    setisLoggedIn(true)
                     navigate('/')
                 }
             

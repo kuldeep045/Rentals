@@ -3,11 +3,10 @@ import Navbar from "../../components/Navbar.jsx";
 import "./Home.css";
 import { houses } from "../../assets/app.js";
 import { clientOpinion } from "../../assets/app.js";
-import Footer from "../../components/Footer.jsx";
 
 function Home() {
   return (
-    <div className="home min-h-[100vh]  w-full relative">
+    <div className="home min-h-[100vh]  w-full relative border-none outline-none">
       <Navbar />
 
       {/* hero */}
@@ -15,7 +14,7 @@ function Home() {
       <div className="w-[80%] flex flex-col gap-3 items-center justify-center h-screen m-auto">
         <h2 className="text-5xl text-white text-center font-bold">Discover your New Home</h2>
         <p className="font-medium text-white text-xl text-center">Helping 100 million renters find their perfect fit</p>
-        <div className="flex gap-4">
+        <div className="flex gap-4 flex-wrap max-tablet:justify-center">
           <input  className="bg-gray-500 bg-opacity-50 border-none outline-none  px-4 py-3 w-60 rounded-md text-start text-white font-medium" type="text" placeholder="Search by location" />
           <button className='text-black bg-white font-medium px-10 py-2 rounded-3xl text-lg'>Search</button>
           </div>
@@ -73,7 +72,6 @@ function Home() {
 
 
       </div>
-      <Footer/>
     </div> 
   );
 }
