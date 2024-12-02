@@ -1,12 +1,14 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import { FiArrowLeft } from "react-icons/fi";
 import { icons, hou } from '../assets/app.js';
 import { useNavigate } from 'react-router';
+import { LoginContext } from '../context/LoginContext.jsx';
 
 
 
 function MyProperties() {
     const navigate = useNavigate()
+    const {profileImg} = useContext(LoginContext)
 
 
     return (
@@ -14,7 +16,7 @@ function MyProperties() {
             <div className='flex justify-between items-center pt-12'>
                 <FiArrowLeft onClick={() => navigate('/')} className='text-white cursor-pointer text-2xl' />
                 <p className='text-white text-2xl'>My Properties</p>
-                <img className='bg-white rounded-full h-8 cursor-pointer' src={icons.user_icon} alt="" />
+                <img className='bg-white rounded-full h-10 w-10 object-cover cursor-pointer' src={profileImg ? profileImg : icons.user_icon} alt="" />
 
             </div>
 

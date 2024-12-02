@@ -32,6 +32,8 @@ function App() {
         setPhone(receivedData.data.phone)
         setisLoggedIn(receivedData.isLoggedIn)
         setProfileImg(receivedData.data.profileImg)
+        setAddress1(receivedData.data.address[0].addressLine1)
+        setAddress2(receivedData.data.address[0].addressLine2)
         setLoading(false)
     })
     .catch((err)=>console.log(err))

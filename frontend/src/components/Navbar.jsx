@@ -78,7 +78,7 @@ function Navbar() {
                     >
                         <img
                             id="User"
-                            className="h-10 cursor-pointer bg-white rounded-full max-tablet:hidden"
+                            className="h-10 w-10 object-cover cursor-pointer bg-white rounded-full max-tablet:hidden"
                             src={profileImg ? profileImg : icons.user_icon}
                             alt="User"
                         />

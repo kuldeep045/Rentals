@@ -66,18 +66,22 @@ function MyProfile() {
   }
 
   async function onSubmitHandler (e) {
+    
+    
     e.preventDefault()
     try {
       const formdata = new FormData()
 
       formdata.append("profileImg", imageFile)
       formdata.append("phone", phone)
+      formdata.append("address", JSON.stringify([{addressLine1: address1, addressLine2: address2}]))
 
 
 
 
     await axios.post('http://localhost:3000/api/v1/users/updateUser', formdata, {withCredentials: true})
     .then(response =>{
+      
       setProfileImg(response.data.data.profileImg)
       setisEditable((prev) => !prev) 
     })
