@@ -1,8 +1,9 @@
 import React from "react";
 import Navbar from "../../components/Navbar.jsx";
 import "./Home.css";
-import { houses } from "../../assets/app.js";
-import { clientOpinion } from "../../assets/app.js";
+import { houses, icons, clientOpinion } from "../../assets/app.js";
+
+
 
 function Home() {
   return (
@@ -58,9 +59,10 @@ function Home() {
                 <div className="h-[60%]">
                   <img className=" h-full w-full object-cover" src={client.image} alt="" />
                 </div>
-                <div className="px-4 text-sm py-6">
+                <div className="px-4 text-sm py-6 relative">
                   <p className="text-left text-white">{client.comment}</p>
                   <p className="text-right text-white mt-6">{client.clientName}</p>
+                  <p className=""><img className="h-4 ml-auto" src={icons.star} alt="" /></p>
                 </div>
 
               </div>

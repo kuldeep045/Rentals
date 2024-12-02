@@ -11,7 +11,9 @@ function Footer() {
     const openTiktok = () => {
         window.open("https://www.tiktok.com/@cooldeep_45", "_blank");
     };
-  return (
+
+
+    return (
     <div className="w-full px-[10%]  text-center pt-6 border-none outline-none  m-auto bg-[#0B051C]">
         
         <div className='flex flex-col items-center client gap-12 py-8 '>

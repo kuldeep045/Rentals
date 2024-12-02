@@ -3,8 +3,7 @@ import ApiError from '../utils/ApiError.js'
 import ApiResponse from '../utils/ApiResponse.js'
 import validator from 'validator'
 import {User} from '../models/user.model.js'
-import { Otp } from '../models/otp.model.js'
-import { sendOtp, generateOtp } from '../utils/Otp.js'
+import uploadOnCloud from '../config/cloudinary.js'
 
 import { getOtp } from '../utils/Otpsend.js'
 
@@ -120,6 +119,21 @@ const sendRegData = asyncHandler(
 )
 
 
+
+const sendUserData =asyncHandler(async (req, res) =>{
+    const user = req.user
+
+    try {
+        const data = await User.findById(user._id).select('-password -refreshToken')
+    
+        console.log(data)
+        return res.status(200).json(new ApiResponse(200, "is logged in", {data, isLoggedIn: true}, true))
+    } catch (error) {
+        console.log(error.message)
+    }    
+})
+
+
 const userLogin = asyncHandler( async(req, res) => {
 
     const {userName, email, password} = req.body
@@ -132,22 +146,29 @@ const userLogin = asyncHandler( async(req, res) => {
     
     const user = await User.findOne({$or:[{email}, {userName}]})
 
-    console.log("user", user)
     if(!user){
         return res.status(404).json(new ApiResponse(404, "User not found", {}, false))
     }
-
+   
+    
     const isPasswordCorrect = await user.isPasswordCorrect(password)
+    console.log(isPasswordCorrect)
     if(!isPasswordCorrect){
         throw new ApiError(401, "Invalid user credetials ")
     }
-
+    
     const {accessToken, refreshToken} = await generateAccessAndRefreshToken(user._id)
     const loggedInUser = await User.findById(user._id).select("-password -refreshToken")
 
+
+    const expireDate = new Date();
+    expireDate.setDate(expireDate.getDate() + 7);
     const options = {
         httpOnly : true,
-        secure : true
+        secure : false,
+        domain: 'localhost',
+        sameSite: "lax",
+        expires: expireDate,
     }
 
     return res
@@ -195,9 +216,53 @@ const logOutUser = asyncHandler( async(req, res) =>{
 })
 
 
+const updateUser = asyncHandler(async(req, res) => {
+    let url = ''
+    const user = req.user
+    const {name, email, address, phone} = req.body
+    const profileImg = req.file
+    
+
+    if(!user){
+        return res.status(400).json(new ApiError(400, "user not provided"))
+    }
+
+    if(profileImg){
+        const response = await uploadOnCloud(profileImg.path)
+        url = response.url
+    }
+    console.log("url", url)
+    
+
+    
+
+        
+    
+
+    const newData = {
+        name,
+        email,
+        address,
+        phone,
+        profileImg: url
+    }
+try {
+    
+        const userData = await User.findByIdAndUpdate(user?._id, {$set: newData}, {new: true, runValidators: true}).select('-password -refreshToken')
+    
+        return res.status(200).json(new ApiResponse(200, "User Updated successfully", userData, true))
+} catch (error) {
+    console.error(error)
+}
+
+})
+
+
 export {
     userRegister,
     sendRegData,
     userLogin,
-    logOutUser
+    logOutUser,
+    sendUserData,
+    updateUser
 }

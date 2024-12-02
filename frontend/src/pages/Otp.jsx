@@ -8,8 +8,8 @@ import { LoginContext } from '../context/LoginContext.jsx'
 
 function Otp() {
   const navigate = useNavigate()
-  const {data, setData} = useContext(otpContext)
-  const {loginState, setloginState,setisLoggedIn } = useContext(LoginContext)
+  const {data} = useContext(otpContext)
+  const {setloginState,setisLoggedIn } = useContext(LoginContext)
 
   
 
@@ -52,8 +52,8 @@ function Otp() {
       if(res.data.success){
         toast.success(res.data.message)
         setloginState("login")
-        setisLoggedIn(true)
-        navigate('/')
+        //setisLoggedIn(true)
+        navigate('/login')
       }
 
 

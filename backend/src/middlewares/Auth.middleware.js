@@ -20,7 +20,7 @@ const authenticate = asynchandler( async function (req, res, next){
 
     
 
-        next()
+       
     } catch (error) {
 
         console.error("Err: ", error.message)

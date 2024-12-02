@@ -10,6 +10,9 @@ dotenv.config()
 
 const app = express()
 
+//cookie parser
+app.use(cookieParser())
+
 //for form data
 app.use(express.json({limit: "20kb"}))
 
@@ -29,8 +32,7 @@ app.use(cors({
 }));
 
 
-//cookie parser
-app.use(cookieParser())
+
 
 
 

@@ -1,5 +1,6 @@
 import { v2 as cloudinary } from 'cloudinary';
-import ApiError from '../utils/ApiError';
+import ApiError from '../utils/ApiError.js';
+import fs from 'fs'
 
   // Configuration
   cloudinary.config({ 
@@ -10,14 +11,16 @@ import ApiError from '../utils/ApiError';
 
 const uploadOnCloud = async (filepath) => {
 
+    console.log(filepath)
     try {
         if(!filepath)throw new ApiError(404, "File not found")
         
             const response = await cloudinary.uploader.upload(filepath,{resource_type: 'auto'})
-        
+            fs.unlinkSync(filepath)
             return response
     } catch (error) {
-        console.error(err.message)
+        console.error(error.message)
+        fs.unlinkSync(filepath)
         throw new ApiError(500, "Error uploading files to cloud")
     }
 }

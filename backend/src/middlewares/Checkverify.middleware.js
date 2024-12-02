@@ -6,6 +6,7 @@ import { Otp } from '../models/otp.model.js';
 export const CheckVerify = async (req, res, next) => {
     try {
         const {email} = req.body;
+        
 
         if (!email) {
             return ApiResponse(404, 'No email provided', {}, false);
@@ -23,6 +24,7 @@ export const CheckVerify = async (req, res, next) => {
         if(!user.verified){
             await getOtp(email)
         }
+       
 
         next();
     } catch (error) {

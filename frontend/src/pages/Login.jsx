@@ -12,16 +12,13 @@ import { LoginContext } from '../context/LoginContext.jsx';
 function Login() {
 
    
-    const {loginState, setloginState, setisLoggedIn} = useContext(LoginContext)
+    const {loginState, setloginState, setisLoggedIn, name, setName, email, setEmail, userName, setUserName } = useContext(LoginContext)
     
     
 
-    const [email, setEmail] = useState('')
-    const [name, setName] = useState('')
-    const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
-    const {data, setData} = useContext(otpContext)
+    const {setData} = useContext(otpContext)
     const [loading, setloading] = useState(false)
 
 
@@ -63,8 +60,12 @@ function Login() {
                 
                 
                 setData(email)
-                //
                 navigate('/verify')
+                //setName('')
+                //setUserName('')
+                //setEmail('')                
+                //setisLoggedIn(true)
+                
                 
             })
             .catch((err) => {
@@ -82,16 +83,22 @@ function Login() {
                 email,
                 password
             }
+            console.log(userName, email, password)
             
-            await axios.post('http://localhost:3000/api/v1/users/login', loginData)
+            await axios.post('http://localhost:3000/api/v1/users/login', loginData,  { withCredentials: true })
             .then((response) => {
-                console.log(response)
+                console.log("response", response)
                 if(!response.data.data.loggedInUser.verified){ 
+
                     navigate('/verify')
-                    console.log("response: ", response.data.data.loggedInUser.verified)
+                    
 
                 }else{
-                    console.log(response)
+                    const respData = response.data.data.loggedInUser
+                    setName(respData.name)
+                    setUserName(respData.userName)
+                    setEmail(respData.email)
+                
                     setisLoggedIn(true)
                     navigate('/')
                 }
@@ -108,10 +115,7 @@ function Login() {
 
 
 
-        setEmail('')
-        setUserName('')
-        setPassword('')
-        setName('')
+        
     }
 
 

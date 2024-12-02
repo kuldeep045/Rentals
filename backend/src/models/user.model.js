@@ -31,11 +31,15 @@ const userSchema = new mongoose.Schema(
         password: {
             type: String,
             required: true,
+            
         },
         address: {
             type: [addressSchema],
         },
-        image: {
+        phone:{
+            type: Number
+        },
+        profileImg: {
             type: String, //link from cloudinary
         },
         refreshToken: {

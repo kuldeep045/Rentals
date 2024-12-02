@@ -10,6 +10,7 @@ import facebook from './facebook-icon.png'
 import tiktok from './tiktok-icon.png'
 import insta from './insta-icon.webp'
 import user_icon from './profile-user.png'
+import star from './Star-Rating-4.5-PNG.png'
 
 
 import h_1 from './houses/house_1.jpg'
@@ -178,7 +179,8 @@ export const icons = {
     facebook,
     tiktok,
     insta,
-    user_icon
+    user_icon,
+    star
 }
 
 export const clientOpinion = [
