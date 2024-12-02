@@ -221,6 +221,10 @@ const updateUser = asyncHandler(async(req, res) => {
     const user = req.user
     const {name, email, address, phone} = req.body
     const profileImg = req.file
+
+    const addressJson = JSON.parse(address)
+    console.log(typeof addressJson)
+
     
 
     if(!user){
@@ -231,7 +235,7 @@ const updateUser = asyncHandler(async(req, res) => {
         const response = await uploadOnCloud(profileImg.path)
         url = response.url
     }
-    console.log("url", url)
+
     
 
     
@@ -242,10 +246,10 @@ const updateUser = asyncHandler(async(req, res) => {
     const newData = {
         name,
         email,
-        address,
+        address: addressJson,
         phone,
-        profileImg: url
-    }
+        profileImg: url.trim().length > 0 ? url : profileImg
+        }
 try {
     
         const userData = await User.findByIdAndUpdate(user?._id, {$set: newData}, {new: true, runValidators: true}).select('-password -refreshToken')
